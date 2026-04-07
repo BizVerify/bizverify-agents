@@ -42,7 +42,7 @@ TOOLS: list[ToolSchema] = [
                 type="string",
                 description="Verification level",
                 required=False,
-                default="full",
+                default="pre_check",
                 enum=["pre_check", "full"],
             ),
             ToolParam(
@@ -56,6 +56,12 @@ TOOLS: list[ToolSchema] = [
                 name="webhook_url",
                 type="string",
                 description="URL to receive async results",
+                required=False,
+            ),
+            ToolParam(
+                name="entity_type",
+                type="string",
+                description="Optional entity type hint (e.g. 'LLC', 'Corporation'). Helps disambiguate results.",
                 required=False,
             ),
         ],
@@ -83,7 +89,7 @@ TOOLS: list[ToolSchema] = [
                 type="integer",
                 description="Maximum number of results to return",
                 required=False,
-                default=10,
+                default=50,
             ),
             ToolParam(
                 name="offset",
@@ -113,7 +119,7 @@ TOOLS: list[ToolSchema] = [
     ToolSchema(
         name="get_entity_history",
         title="get_entity_history",
-        description="Get historical verification snapshots for an entity. Costs 1 credit.",
+        description="Get historical verification snapshots for an entity. Costs 5 credits.",
         params=[
             ToolParam(name="entity_id", type="string", description="Entity ID to retrieve history for"),
             ToolParam(
