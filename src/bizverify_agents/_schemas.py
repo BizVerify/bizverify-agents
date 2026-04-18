@@ -27,8 +27,12 @@ TOOLS: list[ToolSchema] = [
         name="verify_business",
         title="verify_business",
         description=(
-            "Verify a business entity against official government registries. "
-            'Costs 1 credit (pre_check), 15 credits (full), or 25 credits (full + force_refresh).'
+            "Verify a business entity by name in a jurisdiction. Two tiers — "
+            "quick (1 credit): existence + status + good standing. "
+            "Deep (15 credits, 25 with force_refresh): adds entity type, formation date, "
+            "registered agent, officers, principal address, and filing history. "
+            "Deep is available in a subset of jurisdictions; requesting deep where unavailable "
+            "returns quick with a reason."
         ),
         params=[
             ToolParam(name="entity_name", type="string", description="Business entity name to verify"),
@@ -40,15 +44,15 @@ TOOLS: list[ToolSchema] = [
             ToolParam(
                 name="level",
                 type="string",
-                description="Verification level",
+                description="Verification tier: 'quick' or 'deep'",
                 required=False,
-                default="pre_check",
-                enum=["pre_check", "full"],
+                default="quick",
+                enum=["quick", "deep"],
             ),
             ToolParam(
                 name="force_refresh",
                 type="boolean",
-                description="Force fresh data from government registry",
+                description="Bypass cache and fetch fresh data",
                 required=False,
                 default=False,
             ),
@@ -156,7 +160,7 @@ TOOLS: list[ToolSchema] = [
     ToolSchema(
         name="list_jurisdictions",
         title="list_jurisdictions",
-        description="Returns all registered jurisdictions with data coverage and active status.",
+        description="Returns all registered jurisdictions with supported capabilities and active status.",
         params=[],
     ),
     ToolSchema(

@@ -59,7 +59,7 @@ def test_run_tool_verify_business(client: BizVerifyClient, mock_bizverify_sdk: M
     assert "Verification submitted" in result
     assert "job-123" in result
     mock_bizverify_sdk.verification.verify.assert_called_once_with(
-        "Acme Corp", "us-fl", verification_level="full", force_refresh=None, webhook_url=None,
+        "Acme Corp", "us-fl", verification_level="quick", force_refresh=None, webhook_url=None,
     )
 
 
