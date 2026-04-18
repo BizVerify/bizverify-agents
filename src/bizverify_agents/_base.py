@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 from dataclasses import asdict
-from typing import Any
+from typing import Any, Literal
 
 from bizverify import BizVerify, BizVerifyError
 
@@ -91,7 +91,7 @@ class BizVerifyClient:
         self,
         entity_name: str,
         jurisdiction: str,
-        level: str = "full",
+        level: Literal["quick", "deep"] = "quick",
         force_refresh: bool = False,
         webhook_url: str | None = None,
     ) -> str:
