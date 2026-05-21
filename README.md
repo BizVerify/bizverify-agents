@@ -67,8 +67,8 @@ agent = Agent(
 
 | Tool | Description | Credits |
 |------|-------------|---------|
-| `verify_business` | Verify a business entity by name in a jurisdiction (quick or deep tier) | 1-25 |
-| `search_entities` | Search for business entities across jurisdictions | 2/jurisdiction |
+| `verify_business` | Confirm a specific named business — existence, status, good standing, details — in one jurisdiction (quick or deep tier) | 1-25 |
+| `search_entities` | Discover/list candidate businesses when the exact entity is unknown | 2/jurisdiction |
 | `check_job_status` | Poll an async verification job | Free |
 | `get_entity` | Retrieve cached entity data by ID | Free |
 | `get_entity_history` | Get historical verification snapshots | 1 |

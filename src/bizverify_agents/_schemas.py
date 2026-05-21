@@ -27,12 +27,17 @@ TOOLS: list[ToolSchema] = [
         name="verify_business",
         title="verify_business",
         description=(
-            "Verify a business entity by name in a jurisdiction. Two tiers — "
-            "quick (1 credit): existence + status + good standing. "
-            "Deep (15 credits, 25 with force_refresh): adds entity type, formation date, "
-            "registered agent, officers, principal address, and filing history. "
-            "Deep is available in a subset of jurisdictions; requesting deep where unavailable "
-            "returns quick with a reason."
+            "Confirm a specific, named business in one jurisdiction — the PRIMARY tool "
+            "whenever the user wants to verify, check, confirm, or look up a company's "
+            "existence, status, good standing, or details (e.g. 'verify Acme LLC in "
+            "Delaware', 'is Acme registered in FL?', 'I need to verify a company in "
+            "Delaware'). If the user has verification intent but has not given the exact "
+            "company name, ASK them for the name and use THIS tool — do NOT fall back to "
+            "search_entities. Two tiers — quick (1 credit): existence + status + good "
+            "standing. Deep (15 credits, 25 with force_refresh): adds entity type, "
+            "formation date, registered agent, officers, principal address, and filing "
+            "history. Deep is available in a subset of jurisdictions; requesting deep "
+            "where unavailable returns quick with a reason."
         ),
         params=[
             ToolParam(name="entity_name", type="string", description="Business entity name to verify"),
@@ -73,7 +78,15 @@ TOOLS: list[ToolSchema] = [
     ToolSchema(
         name="search_entities",
         title="search_entities",
-        description="Search for business entities across jurisdictions. Costs 2 credits per jurisdiction searched.",
+        description=(
+            "Discover candidate businesses when the exact entity is UNKNOWN — a "
+            "listing/discovery tool, NOT a verification tool. Use only when the user "
+            "wants to browse or list multiple companies matching a partial or fuzzy "
+            "name, or does not yet know which specific entity they mean. If the user can "
+            "name one specific company they want to confirm or check, use verify_business "
+            "instead (ask them for the name first if needed). Costs 2 credits per "
+            "jurisdiction searched."
+        ),
         params=[
             ToolParam(name="query", type="string", description="Business name search query"),
             ToolParam(
